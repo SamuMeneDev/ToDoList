@@ -1,33 +1,21 @@
 const btnAdd = document.querySelector("#addTask");
 const listaEl = document.querySelector("#list");
 const inputEl = document.querySelector("#input");
-let tasks = [
-  {
-    id: 1,
-    title: "Jogar bola",
-    isCompleted: false,
-  },
-  {
-    id: 2,
-    title: "Estudar Javascript",
-    isCompleted: false,
-  },
-];
+let tasks = [];
 document.addEventListener("DOMContentLoaded", function () {
   updateList();
 });
 function updateList() {
     listaEl.innerHTML = `<ul id="list"></ul>`;
     if(tasks.length==0) {
-        listaEl.innerHTML = `<ul id="list">Adicione uma tarefa</ul>`;
+        listaEl.innerHTML = `Adicione uma tarefa`;
     } else {
         tasks.forEach((task) => {
             const el = document.createElement("li");
+            el.id = task.id;
             el.innerHTML = `
-                <li id="${task.id}">
-                    <button id="${task.id}" onclick="checkTask(this)">${task.isCompleted?`<strike>${task.title}</strike>`:task.title}</button>
-                    <button id="${task.id}" onclick="deletar(this)">Deletar</button>
-                </li>`;
+              <button id="${task.id}" onclick="checkTask(this)">${task.isCompleted?`<strike>${task.title}</strike>`:task.title}</button>
+              <button id="${task.id}" onclick="deletar(this)"><i class="fa-solid fa-trash"></i></button>`;
             listaEl.appendChild(el);
         });
     }
